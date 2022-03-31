@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width">
 	<title>рука об руку</title>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
@@ -17,13 +17,13 @@
 
       <div class="putin_vor"> putin vor! </div>
 
-      <h1>добро пожаловать <br> в игру!</h1>
+      <h1>добро пожаловать в&nbsp;игру!</h1>
       <div class="hline-1"></div>
 
       <p> Пройди свой путь борьбы, не обманувшись защитными механизмами твоей психики.  </p>
       <div class="hline-1"></div>
-
-      <div class="choose">
+<div class="settings">
+      <div class="choose" id="choose_1">
         <p>Выбери пожалуйста испытание:</p>
         <div class="c-1">
           <img src="images/prev-btn.svg" id="prev-btn-1">
@@ -33,7 +33,7 @@
       </div>  
       <div class="hline-1"></div>
 
-       <div class="choose">
+       <div class="choose" id="choose_2">
         <p>Выбери пожалуйста персонажа:</p>
         <div class="c-1">
           <img src="images/prev-btn.svg" id="prev-btn-2"></img>
@@ -41,9 +41,9 @@
           <img src="images/next-btn.svg" id="next-btn-2"></img>
         </div>
       </div>  
+    </div>
       <div class="line-1"></div>
     </div>
-    <div class="vline-1"></div>
   </div>
     <div class="hands">
       <img src="images/hand-1.png">
@@ -59,7 +59,7 @@
 
     <div class="top_line">
       <div class="content">
-        <p>пройди через все тревоги</p>
+        <p id="anxious">пройди через все тревоги</p>
         <div class="score">
           <p>ресурсы:&nbsp;</p>
           <p id="score">100</p>
@@ -135,9 +135,9 @@
 
     <div id="lvl_5">
       <div class="objects">
-        <img src="images/sublime_1_1.png" id="s_1"  width="30%" height="30%">
-        <img src="images/sublime_2_1.png" id="s_2"  width="25%" height="25%">
-        <img src="images/sublime_3_1.png" id="s_3"  width="30%" height="30%">
+        <img src="images/sublime_1_1.png" id="s_1"  >
+        <img src="images/sublime_2_1.png" id="s_2"  >
+        <img src="images/sublime_3_1.png" id="s_3"  >
       </div>
    </div>
 
@@ -154,13 +154,14 @@
 
   </div>
 <div id="lvl_6"></div>
+
   <div class="level_end">
     <div class="content">
-      <div class="result"><h1>остаток ресурсов:&nbsp;</h1><h1 id="result">100</h1></div>
+      <div class="result"><h1>остаток ресурсов:&nbsp;<span id="result">100</span></h1></div>
       <div class="vline-2"></div>
       <div class="text">
-        <p>ты молодец, но твоя психика борется <br>с изменениями </p>
-        <p>чтобы перейти дальше пройди<br>через защитный механизм <span id="level_name">отрицания</span> </p>
+        <p>ты молодец, но твоя психика борется &nbsp;с изменениями </p>
+        <p>чтобы перейти дальше пройди&nbsp;через защитный механизм <span id="level_name">отрицания</span> </p>
        </div>
 
     </div>
@@ -176,12 +177,8 @@
 <div class="finish"> 
    <div class="container">
 
-     <div class="content">
       <p>поздравляю! <br> ты прошел игру!</p>
       <p> <span class="blockgame">паника</span> проработана. твой результат не важен. важно то, что твоя психика не обманулась <br> ни одним защитным механизмом  в твоей личной борьбе. </p>
-    </div>
-
-    <div class="vline-1"></div>
   </div>
 
     <div class="hands">
@@ -376,6 +373,9 @@ $("#game-btn").click(function() {
             var pole2_current_position = parseInt(pole2.css('right'));
             var bg_current_position = parseInt(bg.css('margin-left'));
 
+            console.log(pole_current_position);
+            console.log(container_width - bird_left);
+
             if (pole_current_position === container_width - bird_left || pole2_current_position === container_width - bird_left){
               
 
@@ -423,7 +423,6 @@ $("#game-btn").click(function() {
                 go_down();
             }
         }
-
     }, 40);
 
   }
@@ -549,7 +548,7 @@ $(document).ready(function(){
   }
   if (parseInt(level.text()) == 6){
     lvl_6();
-    $(".main_game").css("display","none");
+    $(".game_container").css("display","none");
     $( "#what_word" ).text("проекция"); 
     $( "#what_text" ).text("проекция");    
     $( "#text_text" ).text("Рационализа́ция — механизм психологической защиты, при котором в мышлении используется только та часть воспринимаемой информации, и делаются только те выводы, благодаря которым собственное поведение предстаёт как хорошо контролируемое и не противоречащее объективным обстоятельствам. ");
@@ -575,10 +574,10 @@ function lvl_2(){
     var top = hand1.position().top;
     var bottom = hand1.position().bottom;
     var left = hand1.position().left;
-    var width = parseInt(hand1.css('height'));
+    var width = 0.95*parseInt(hand1.css('height'));
     var height = 0.7*parseInt(hand1.css('width'));
-    console.log(top);
-    console.log(height);
+    console.log(left);
+    console.log(width);
      $(document).ready(function(){
         if((0 - left) >= width || (0 - top) >= height ){
       hand1.css('left','-3000px');
@@ -653,7 +652,7 @@ function lvl_3(){
   var check2 = false;
   var check3 = false;
     $("#point_2").click(function(){
-    $("#line_1").animate({width: "600px"}, 1000);
+    $("#line_1").animate({width: $("#p2").position().left - $("#p1").position().left}, 1000);
     sound_up();
     check1=true;
     return check1;
@@ -662,7 +661,7 @@ function lvl_3(){
    
     $("#point_4").click(function(){
     if(check1==true){
-    $("#line_2").animate({height: "540px"}, 1000);
+    $("#line_2").animate({height: $("#p4").position().top - $("#p2").position().top}, 1000);
     sound_up();
     check2=true;
   }
@@ -671,7 +670,7 @@ function lvl_3(){
   
     $("#point_3").click(function(){
       if(check2==true){
-    $("#line_3").animate({width: "600px", left: $("#p3").position().top + 16 + "px" }, 1000);
+    $("#line_3").animate({width: $("#p2").position().left - $("#p1").position().left, left: $("#p3").position().left + 16 + "px" }, 1000);
     sound_up();
     check3=true;
   }
@@ -680,7 +679,7 @@ function lvl_3(){
   
     $("#point_1").click(function(){
       if(check3==true){
-    $("#line_4").animate({height: "540px", top: $("#p1").position().top + 16 + "px"}, 1000);
+    $("#line_4").animate({height: $("#p4").position().top - $("#p2").position().top, top: $("#p1").position().top + 16 + "px"}, 1000);
     sound_up();
     setTimeout(function () {
     $("#lvl_3").css("display","none");
@@ -822,10 +821,11 @@ if (lvl5_check1==true && lvl5_check2==true && lvl5_check3==true){
 }
 
 function lvl_6(){
+   info();
   $("#game_container").css("display","none");
   $(".finish").css("display","block");
   $("#lvl_6").css("display","block");
-  info();
+ 
   $(".top_line").css("display","none");
   $(".hline-2").css("display","none");
   
@@ -834,7 +834,7 @@ function lvl_6(){
         for (var i=0; i<100; i++){
     $('#lvl_6').append('<img src="images/eye.png"  class="eye">');
     $('.eye').each(function(){
-        $(this).css({"left": Math.random() * parseInt($('#lvl_6').css("width")) - 0.05*parseInt($('#lvl_6').css("width")) , 
+        $(this).css({"left": Math.random() * 0.9*parseInt($('#lvl_6').css("width")) - 0.05*parseInt($('#lvl_6').css("width")) , 
           "top": Math.random() * parseInt($('#lvl_6').css("height"))-0.1*parseInt($('#lvl_6').css("height"))});      
       });
   }
